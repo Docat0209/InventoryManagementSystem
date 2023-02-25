@@ -1,4 +1,9 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using InventoryManagementSystem.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<InventoryManagementSystemContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("InventoryManagementSystemContext") ?? throw new InvalidOperationException("Connection string 'InventoryManagementSystemContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
